@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="template-generator" tests="1" assertions="1" failures="0" errors="0" time="0.000230">
-    <testsuite name="WebTestCase" file="/var/www/task_api/src/protected/tests/WebTestCase.php" tests="1" assertions="1" failures="0" errors="0" time="0.000230">
-      <testcase name="test_true" class="WebTestCase" file="/var/www/task_api/src/protected/tests/WebTestCase.php" line="19" assertions="1" time="0.000230"/>
+  <testsuite name="template-generator" tests="2" assertions="2" failures="0" errors="0" time="0.011454">
+    <testsuite name="WebTestCase" file="/var/www/task_api/src/protected/tests/WebTestCase.php" tests="1" assertions="1" failures="0" errors="0" time="0.000247">
+      <testcase name="test_true" class="WebTestCase" file="/var/www/task_api/src/protected/tests/WebTestCase.php" line="19" assertions="1" time="0.000247"/>
+    </testsuite>
+    <testsuite name="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" tests="1" assertions="1" failures="0" errors="0" time="0.011207">
+      <testcase name="test_actionIndex" class="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" line="41" assertions="1" time="0.011207"/>
     </testsuite>
   </testsuite>
 </testsuites>
