@@ -12,3 +12,6 @@ sudo apt -y --force-yes install vim nmap
 
 #install git for getting necessary packages
 sudo apt -y --force-yes install git 
+
+#install inxi to get data from the system
+sudo apt -y --force-yes install inxi

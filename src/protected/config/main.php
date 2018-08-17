@@ -77,8 +77,8 @@ return array(
 				*/
 			),
 		),
-		'hash' => array('class' => 'PBKDF2Hash'),
-		'random' => array('class' => 'RandomString')
+        'hash' => ['class' => 'Common\PBKDF2Hash'],
+        'random' => ['class' => 'Common\RandomString']
 	),
 
 	// application-level parameters that can be accessed using Yii::app()->params['paramName']

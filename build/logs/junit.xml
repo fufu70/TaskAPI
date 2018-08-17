@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="template-generator" tests="2" assertions="2" failures="0" errors="0" time="0.011454">
-    <testsuite name="WebTestCase" file="/var/www/task_api/src/protected/tests/WebTestCase.php" tests="1" assertions="1" failures="0" errors="0" time="0.000247">
-      <testcase name="test_true" class="WebTestCase" file="/var/www/task_api/src/protected/tests/WebTestCase.php" line="19" assertions="1" time="0.000247"/>
+  <testsuite name="template-generator" tests="6" assertions="9" failures="0" errors="0" time="0.102917">
+    <testsuite name="NodeController_Test" file="/var/www/task_api/src/protected/tests/controllers/NodeController.php" tests="5" assertions="8" failures="0" errors="0" time="0.099743">
+      <testsuite name="NodeController_Test::test_actionNodeCreate" tests="1" assertions="4" failures="0" errors="0" time="0.098808">
+        <testcase name="test_actionNodeCreate with data set #0" assertions="4" time="0.098808"/>
+      </testsuite>
+      <testsuite name="NodeController_Test::test_actionNodeCreateFail" tests="4" assertions="4" failures="0" errors="0" time="0.000935">
+        <testcase name="test_actionNodeCreateFail with data set #0" assertions="1" time="0.000254"/>
+        <testcase name="test_actionNodeCreateFail with data set #1" assertions="1" time="0.000240"/>
+        <testcase name="test_actionNodeCreateFail with data set #2" assertions="1" time="0.000222"/>
+        <testcase name="test_actionNodeCreateFail with data set #3" assertions="1" time="0.000219"/>
+      </testsuite>
     </testsuite>
-    <testsuite name="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" tests="1" assertions="1" failures="0" errors="0" time="0.011207">
-      <testcase name="test_actionIndex" class="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" line="41" assertions="1" time="0.011207"/>
+    <testsuite name="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" tests="1" assertions="1" failures="0" errors="0" time="0.003174">
+      <testcase name="test_actionIndex" class="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" line="41" assertions="1" time="0.003174"/>
     </testsuite>
   </testsuite>
 </testsuites>

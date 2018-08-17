@@ -44,6 +44,6 @@ class TaskController_Test extends TestController
             "Content-type: application/json\n" .
             '{"installation":"https:\/\/github.com\/fufu70\/TaskAPI\/wiki\/Installation","testing":"https:\/\/github.com\/fufu70\/TaskAPI\/wiki\/Testing"}';
 
-        $this->assertControllerResponse('actionIndex', '/asset/', $expectedOutput);
+        $this->assertControllerResponse('actionIndex', '/task/', $expectedOutput);
     }
 }
