@@ -14,7 +14,7 @@ if [ $CLEAN_DOC_ROOT = "DocumentRoot/var/www/html" ]; then
     sudo sed -i '166s/AllowOverride\ None/AllowOverride\ All/g' /etc/apache2/apache2.conf
 
     # Setup root directory for apache to be /var/www/website
-    sudo sed -i 's/\/var\/www\/html/\/var\/www\/task_api/g' /etc/apache2/sites-enabled/000-default.conf
+    sudo sed -i 's/\/var\/www\/html/\/var\/www\/task_api\/src/g' /etc/apache2/sites-enabled/000-default.conf
 fi
 
 # Set Apache Variables
@@ -35,4 +35,4 @@ sudo a2enmod headers
 sudo service apache2 restart
 
 # For GII!!!
-sudo mkdir /var/www/task_api/assets
+sudo mkdir /var/www/task_api/src/assets

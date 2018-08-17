@@ -4,7 +4,8 @@ Vagrant.configure(2) do |config|
   
   # Mentioning the SSH Username/Password:
   config.vm.boot_timeout = 100000000000
-  config.vm.synced_folder "src/", "/var/www/task_api", owner: "www-data", group: "www-data"
+  config.vm.synced_folder "src/", "/var/www/task_api/src", owner: "www-data", group: "www-data"
+  config.vm.synced_folder "build/", "/var/www/task_api/build", owner: "vagrant", group: "vagrant"
   config.vm.synced_folder "vagrant/", "/home/vagrant/install", owner: "vagrant", group: "vagrant"
   config.vm.synced_folder "sql/", "/home/vagrant/sql", owner: "vagrant", group: "vagrant"
 
