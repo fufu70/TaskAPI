@@ -27,7 +27,7 @@ return array(
 		'gii' => array(
 			'class' => 'system.gii.GiiModule',
 			'password' => 'here',
-            'ipFilters' => array('127.0.0.1','192.168.207.*', '10.0.2.*'), 
+            'ipFilters' => array('127.0.0.1','192.168.201.*', '10.0.2.*'), 
 			'generatorPaths' => array(
 				'ext.giix-core', // giix generators
 			),
@@ -85,6 +85,6 @@ return array(
 	'params' => require(dirname(__FILE__) . '/params.php'),
 	
 	'controllerMap' => array(
-		'default' => 'application.controllers.DefaultController',
+		'default' => 'application.controllers.TaskController',
 	),
 );

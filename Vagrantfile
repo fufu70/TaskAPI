@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
 
   # Begin Configuring
   config.vm.define "task_api" do|task_api|
-    task_api.vm.hostname = "task_api.net" # Setting up hostname
+    task_api.vm.hostname = "taskapi.net" # Setting up hostname
     task_api.vm.network "private_network", ip: "192.168.201.75" # Setting up machine's IP Address
     task_api.vm.provision :shell, path: "vagrant/install.sh" # Provisioning with script.sh
   end
