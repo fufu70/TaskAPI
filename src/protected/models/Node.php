@@ -32,7 +32,7 @@ class Node extends BaseNode
     /**
      * Converts all of the node information to an array.
      *
-     * The node contains not only information about its "self"
+     * The node contains only information about its "self"
      *
      * @return array All of the node information.
      */
@@ -60,7 +60,7 @@ class Node extends BaseNode
      * Filters criteria by node_hash_id.
      *
      * @param  string $node_hash_id The error hash id to filter by.
-     * @return DBError               A reference to this.
+     * @return Node                 A reference to this.
      */
     public function nodeHashID($node_hash_id)
     {

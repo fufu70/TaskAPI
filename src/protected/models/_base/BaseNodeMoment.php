@@ -15,7 +15,7 @@
  * @property string $cpu_usage
  * @property string $memory_usage
  * @property string $hard_disk_usage
- * @property string $tempurature
+ * @property string $temperature
  * @property string $weather
  * @property string $created_at
  *
@@ -43,11 +43,11 @@ abstract class BaseNodeMoment extends GxActiveRecord {
 		return array(
 			array('node_id, node_moment_hash_id', 'required'),
 			array('node_id', 'numerical', 'integerOnly'=>true),
-			array('node_moment_hash_id, hard_disk_usage, tempurature, weather', 'length', 'max'=>256),
-			array('cpu_usage, memory_usage', 'length', 'max'=>1024),
+			array('node_moment_hash_id, weather', 'length', 'max'=>256),
+			array('cpu_usage, memory_usage, hard_disk_usage, temperature', 'length', 'max'=>1024),
 			array('created_at', 'safe'),
-			array('cpu_usage, memory_usage, hard_disk_usage, tempurature, weather, created_at', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('node_moment_id, node_id, node_moment_hash_id, cpu_usage, memory_usage, hard_disk_usage, tempurature, weather, created_at', 'safe', 'on'=>'search'),
+			array('cpu_usage, memory_usage, hard_disk_usage, temperature, weather, created_at', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('node_moment_id, node_id, node_moment_hash_id, cpu_usage, memory_usage, hard_disk_usage, temperature, weather, created_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,7 +70,7 @@ abstract class BaseNodeMoment extends GxActiveRecord {
 			'cpu_usage' => Yii::t('app', 'Cpu Usage'),
 			'memory_usage' => Yii::t('app', 'Memory Usage'),
 			'hard_disk_usage' => Yii::t('app', 'Hard Disk Usage'),
-			'tempurature' => Yii::t('app', 'Tempurature'),
+			'temperature' => Yii::t('app', 'Temperature'),
 			'weather' => Yii::t('app', 'Weather'),
 			'created_at' => Yii::t('app', 'Created At'),
 			'node' => null,
@@ -86,7 +86,7 @@ abstract class BaseNodeMoment extends GxActiveRecord {
 		$criteria->compare('cpu_usage', $this->cpu_usage, true);
 		$criteria->compare('memory_usage', $this->memory_usage, true);
 		$criteria->compare('hard_disk_usage', $this->hard_disk_usage, true);
-		$criteria->compare('tempurature', $this->tempurature, true);
+		$criteria->compare('temperature', $this->temperature, true);
 		$criteria->compare('weather', $this->weather, true);
 		$criteria->compare('created_at', $this->created_at, true);
 
