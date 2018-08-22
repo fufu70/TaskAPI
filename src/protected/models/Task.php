@@ -17,6 +17,16 @@ Yii::import('application.models._base.BaseTask');
  */
 class Task extends BaseTask
 {
+    const QUERY_UNCONNECTED_TASK = "
+        SELECT DISTINCT 
+            task.task_hash_id
+        FROM tbl_task AS task 
+        LEFT JOIN tbl_node_has_task AS node_has_task 
+            ON task.task_id = node_has_task.task_id
+        WHERE
+            node_has_task.node_id IS NULL
+        LIMIT 1";
+
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
@@ -66,5 +76,37 @@ class Task extends BaseTask
     {
         $this->getDbCriteria()->compare('t.task_hash_id', $task_hash_id);
         return $this;
+    }
+
+    /**
+     *
+     *
+     * Query Methods
+     *
+     *
+     */
+    
+    /**
+     * Returns with an unconnected task.
+     *
+     * Queries through the DB to find a task that is not yet connected
+     * to a node and then returns it.
+     * 
+     * @return Task An unconnected Task or simply null.
+     */
+    public function getUnconnectedTask()
+    {
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand(self::QUERY_UNCONNECTED_TASK);
+        $result = $command->query();
+
+        
+        if (sizeof($result) > 0) {
+            foreach ($result as $task) {
+                return self::model()->taskHashID($task['task_hash_id'])->find();
+            }
+        }
+
+        return null;
     }
 }

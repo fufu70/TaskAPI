@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="template-generator" tests="20" assertions="31" failures="0" errors="1" time="0.124734">
-    <testsuite name="NodeController_Test" file="/var/www/task_api/src/protected/tests/controllers/NodeController.php" tests="5" assertions="8" failures="0" errors="0" time="0.079455">
-      <testsuite name="NodeController_Test::test_actionNodeCreate" tests="1" assertions="4" failures="0" errors="0" time="0.078400">
-        <testcase name="test_actionNodeCreate with data set #0" assertions="4" time="0.078400"/>
+  <testsuite name="template-generator" tests="24" assertions="38" failures="0" errors="0" time="0.198450">
+    <testsuite name="NodeController_Test" file="/var/www/task_api/src/protected/tests/controllers/NodeController.php" tests="5" assertions="8" failures="0" errors="0" time="0.111674">
+      <testsuite name="NodeController_Test::test_actionNodeCreate" tests="1" assertions="4" failures="0" errors="0" time="0.110336">
+        <testcase name="test_actionNodeCreate with data set #0" assertions="4" time="0.110336"/>
       </testsuite>
-      <testsuite name="NodeController_Test::test_actionNodeCreateFail" tests="4" assertions="4" failures="0" errors="0" time="0.001055">
-        <testcase name="test_actionNodeCreateFail with data set #0" assertions="1" time="0.000222"/>
-        <testcase name="test_actionNodeCreateFail with data set #1" assertions="1" time="0.000224"/>
-        <testcase name="test_actionNodeCreateFail with data set #2" assertions="1" time="0.000384"/>
-        <testcase name="test_actionNodeCreateFail with data set #3" assertions="1" time="0.000225"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="NodeMomentController_Test" file="/var/www/task_api/src/protected/tests/controllers/NodeMomentController.php" tests="8" assertions="14" failures="0" errors="0" time="0.030661">
-      <testsuite name="NodeMomentController_Test::test_actionNodeMomentCreate" tests="1" assertions="7" failures="0" errors="0" time="0.029084">
-        <testcase name="test_actionNodeMomentCreate with data set #0" assertions="7" time="0.029084"/>
-      </testsuite>
-      <testsuite name="NodeMomentController_Test::test_actionNodeMomentCreateFail" tests="7" assertions="7" failures="0" errors="0" time="0.001577">
-        <testcase name="test_actionNodeMomentCreateFail with data set #0" assertions="1" time="0.000233"/>
-        <testcase name="test_actionNodeMomentCreateFail with data set #1" assertions="1" time="0.000169"/>
-        <testcase name="test_actionNodeMomentCreateFail with data set #2" assertions="1" time="0.000259"/>
-        <testcase name="test_actionNodeMomentCreateFail with data set #3" assertions="1" time="0.000194"/>
-        <testcase name="test_actionNodeMomentCreateFail with data set #4" assertions="1" time="0.000174"/>
-        <testcase name="test_actionNodeMomentCreateFail with data set #5" assertions="1" time="0.000193"/>
-        <testcase name="test_actionNodeMomentCreateFail with data set #6" assertions="1" time="0.000355"/>
+      <testsuite name="NodeController_Test::test_actionNodeCreateFail" tests="4" assertions="4" failures="0" errors="0" time="0.001338">
+        <testcase name="test_actionNodeCreateFail with data set #0" assertions="1" time="0.000435"/>
+        <testcase name="test_actionNodeCreateFail with data set #1" assertions="1" time="0.000343"/>
+        <testcase name="test_actionNodeCreateFail with data set #2" assertions="1" time="0.000305"/>
+        <testcase name="test_actionNodeCreateFail with data set #3" assertions="1" time="0.000255"/>
       </testsuite>
     </testsuite>
-    <testsuite name="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" tests="7" assertions="9" failures="0" errors="1" time="0.014618">
-      <testcase name="test_actionIndex" class="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" line="109" assertions="1" time="0.002982"/>
-      <testsuite name="TaskController_Test::test_actionTaskCreate" tests="1" assertions="4" failures="0" errors="0" time="0.009886">
-        <testcase name="test_actionTaskCreate with data set #0" assertions="4" time="0.009886"/>
+    <testsuite name="NodeMomentController_Test" file="/var/www/task_api/src/protected/tests/controllers/NodeMomentController.php" tests="8" assertions="14" failures="0" errors="0" time="0.028061">
+      <testsuite name="NodeMomentController_Test::test_actionNodeMomentCreate" tests="1" assertions="7" failures="0" errors="0" time="0.026267">
+        <testcase name="test_actionNodeMomentCreate with data set #0" assertions="7" time="0.026267"/>
       </testsuite>
-      <testsuite name="TaskController_Test::test_actionTaskCreateFail" tests="4" assertions="4" failures="0" errors="0" time="0.001428">
-        <testcase name="test_actionTaskCreateFail with data set #0" assertions="1" time="0.000231"/>
-        <testcase name="test_actionTaskCreateFail with data set #1" assertions="1" time="0.000488"/>
-        <testcase name="test_actionTaskCreateFail with data set #2" assertions="1" time="0.000207"/>
-        <testcase name="test_actionTaskCreateFail with data set #3" assertions="1" time="0.000502"/>
+      <testsuite name="NodeMomentController_Test::test_actionNodeMomentCreateFail" tests="7" assertions="7" failures="0" errors="0" time="0.001794">
+        <testcase name="test_actionNodeMomentCreateFail with data set #0" assertions="1" time="0.000291"/>
+        <testcase name="test_actionNodeMomentCreateFail with data set #1" assertions="1" time="0.000303"/>
+        <testcase name="test_actionNodeMomentCreateFail with data set #2" assertions="1" time="0.000213"/>
+        <testcase name="test_actionNodeMomentCreateFail with data set #3" assertions="1" time="0.000210"/>
+        <testcase name="test_actionNodeMomentCreateFail with data set #4" assertions="1" time="0.000241"/>
+        <testcase name="test_actionNodeMomentCreateFail with data set #5" assertions="1" time="0.000241"/>
+        <testcase name="test_actionNodeMomentCreateFail with data set #6" assertions="1" time="0.000295"/>
       </testsuite>
-      <testcase name="test_actionTaskRequest" class="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" line="161" assertions="0" time="0.000322">
-        <error type="PHPUnit_Framework_Error_Warning">TaskController_Test::test_actionTaskRequest
-Missing argument 1 for TaskController_Test::test_actionTaskRequest()
-
-/var/www/task_api/src/protected/tests/controllers/TaskController.php:161
-</error>
-      </testcase>
+    </testsuite>
+    <testsuite name="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" tests="11" assertions="16" failures="0" errors="0" time="0.058715">
+      <testcase name="test_actionIndex" class="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" line="153" assertions="1" time="0.003659"/>
+      <testsuite name="TaskController_Test::test_actionTaskCreate" tests="1" assertions="4" failures="0" errors="0" time="0.013670">
+        <testcase name="test_actionTaskCreate with data set #0" assertions="4" time="0.013670"/>
+      </testsuite>
+      <testsuite name="TaskController_Test::test_actionTaskCreateFail" tests="4" assertions="4" failures="0" errors="0" time="0.000569">
+        <testcase name="test_actionTaskCreateFail with data set #0" assertions="1" time="0.000203"/>
+        <testcase name="test_actionTaskCreateFail with data set #1" assertions="1" time="0.000124"/>
+        <testcase name="test_actionTaskCreateFail with data set #2" assertions="1" time="0.000126"/>
+        <testcase name="test_actionTaskCreateFail with data set #3" assertions="1" time="0.000116"/>
+      </testsuite>
+      <testcase name="test_actionTaskRequest" class="TaskController_Test" file="/var/www/task_api/src/protected/tests/controllers/TaskController.php" line="203" assertions="3" time="0.027521"/>
+      <testsuite name="TaskController_Test::test_actionTaskRequestFail" tests="3" assertions="3" failures="0" errors="0" time="0.001599">
+        <testcase name="test_actionTaskRequestFail with data set #0" assertions="1" time="0.000349"/>
+        <testcase name="test_actionTaskRequestFail with data set #1" assertions="1" time="0.000234"/>
+        <testcase name="test_actionTaskRequestFail with data set #2" assertions="1" time="0.001016"/>
+      </testsuite>
+      <testsuite name="TaskController_Test::test_actionTaskRequestNoTask" tests="1" assertions="1" failures="0" errors="0" time="0.011697">
+        <testcase name="test_actionTaskRequestNoTask with data set #0" assertions="1" time="0.011697"/>
+      </testsuite>
     </testsuite>
   </testsuite>
 </testsuites>

@@ -94,6 +94,50 @@ class TaskController_Test extends TestController
     }
 
     /**
+     * Contains an array of missing node_hash_id or non-existant requesting tasks 
+     * and their respective fail cases.
+     * 
+     * @return array An array of POST data with expected fail responses.
+     */
+    public function input_actionTaskRequestFail()
+    {
+        return [
+            [
+                [
+                    
+                ],
+                'Not a proper http method type, please send a POST'
+            ],
+            [
+                [
+                    'node_hash_id' => ''
+                ],
+                "Error cannot be created as no node_hash_id was provided, please send a POST with 'node_hash_id'"
+            ],
+            [
+                [
+                    'node_hash_id' => 'default_hash_id'
+                ],
+                "Error cannot be created as no existing node_hash_id was provided, please send a POST with an existing 'node_hash_id'"
+            ],
+        ];
+    }
+
+    /**
+     * Contains an array of No task error messages.
+     * 
+     * @return array An array of expected fail responses.
+     */
+    public function input_actionTaskRequestNoTask()
+    {
+        return [
+            [
+                "Error, no tasks are available. Please try again later."
+            ],
+        ];
+    }
+
+    /**
      *
      *
      *
@@ -155,10 +199,8 @@ class TaskController_Test extends TestController
 
     /**
      * Makes a request to a pre-created task with a pre-created node.
-     * 
-     * @param  array  $post
      */
-    public function test_actionTaskRequest($post)
+    public function test_actionTaskRequest()
     {
         DummyTask::forge(); // make sure the DB has a task stored
         $post['node_hash_id'] = DummyNode::forge()->node_hash_id;
@@ -172,6 +214,50 @@ class TaskController_Test extends TestController
         $node = Node::model()->nodeHashID($_POST['node_hash_id'])->find();
         $this->assertTrue(sizeof($node->nodeHasTasks) > 0);
         $this->assertEquals(current($node->nodeHasTasks)->task_id, $task->task_id);
+    }
+
+    /**
+     * Tests the actionRequest method for failing messages.
+     * 
+     * @dataProvider input_actionTaskRequestFail
+     * 
+     * @param  array  $post
+     * @param  string $fail_response
+     */
+    public function test_actionTaskRequestFail($post, $fail_response)
+    {
+        $_POST = $post;
+        
+        $fail_json = $this->getFailJSON('/task/request', 'actionRequest');
+
+        $this->assertTrue($fail_json->errors->general[0] == $fail_response);
+    }
+
+    /**
+     * Tests the actionRequest method for a request with non-existant tasks.
+     * 
+     * @dataProvider input_actionTaskRequestNoTask
+     * 
+     * @param  string $fail_response
+     */
+    public function test_actionTaskRequestNoTask($fail_response)
+    {
+        $post = array();
+        DummyTask::forge(); // make sure the DB has a task stored
+        $post['node_hash_id'] = DummyNode::forge()->node_hash_id;
+        $_POST = $post;
+
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand("DELETE from tbl_node_has_task");
+        $result = $command->query();
+
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand("DELETE from tbl_task");
+        $result = $command->query();
+
+        $fail_json = $this->getFailJSON('/task/request', 'actionRequest');
+
+        $this->assertTrue($fail_json->errors->general[0] == $fail_response);
     }
 
     /**
