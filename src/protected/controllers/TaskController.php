@@ -60,7 +60,6 @@ class TaskController extends ApiController
             );
         } else {
             try {
-                // var_dump("die"); die();
                 $task = $this->createTask();
 
                 if (sizeof($task->getErrors()) == 0) {
