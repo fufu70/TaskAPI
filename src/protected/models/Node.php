@@ -59,7 +59,7 @@ class Node extends BaseNode
     /**
      * Filters criteria by node_hash_id.
      *
-     * @param  string $node_hash_id The error hash id to filter by.
+     * @param  string $node_hash_id The node hash id to filter by.
      * @return Node                 A reference to this.
      */
     public function nodeHashID($node_hash_id)

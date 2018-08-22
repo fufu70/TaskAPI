@@ -62,7 +62,7 @@ class NodeMoment extends BaseNodeMoment
     /**
      * Filters criteria by node_moment_hash_id.
      *
-     * @param  string $node_moment_hash_id The error hash id to filter by.
+     * @param  string $node_moment_hash_id The node moment hash id to filter by.
      * @return NodeMoment                  A reference to this.
      */
     public function nodeMomentHashID($node_moment_hash_id)

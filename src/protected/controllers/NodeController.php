@@ -77,7 +77,6 @@ class NodeController extends ApiController
         return $node;
     }
 
-
     /**
      * Checks if the provided POST key name is missing.
      * 
