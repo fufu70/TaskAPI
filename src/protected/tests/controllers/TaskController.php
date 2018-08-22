@@ -152,6 +152,28 @@ class TaskController_Test extends TestController
         $this->assertTrue($fail_json->errors->general[0] == $fail_response);
     }
 
+
+    /**
+     * Makes a request to a pre-created task with a pre-created node.
+     * 
+     * @param  array  $post
+     */
+    public function test_actionTaskRequest($post)
+    {
+        DummyTask::forge(); // make sure the DB has a task stored
+        $post['node_hash_id'] = DummyNode::forge()->node_hash_id;
+        $_POST = $post;
+        
+        $task_json = $this->getOKJSON('/task/request', 'actionRequest');
+        // does task exist
+        $this->assertTrue(Task::model()->taskHashID($task_json->task_hash_id)->exists());
+        // is task with node
+        $task = Task::model()->taskHashID($task_json->task_hash_id)->find();
+        $node = Node::model()->nodeHashID($_POST['node_hash_id'])->find();
+        $this->assertTrue(sizeof($node->nodeHasTasks) > 0);
+        $this->assertEquals(current($node->nodeHasTasks)->task_id, $task->task_id);
+    }
+
     /**
      * Confirms that the task created is the same as that of the POST passed.
      * 

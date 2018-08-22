@@ -162,7 +162,7 @@ class NodeMomentController_Test extends TestController
     public function test_actionNodeMomentCreate($post)
     {
         // create node
-        $node = $this->createDummyNode();
+        $node = DummyNode::forge();
         $post['node_hash_id'] = $node->node_hash_id;
         $_POST = $post;
         
@@ -204,25 +204,5 @@ class NodeMomentController_Test extends TestController
         $this->assertTrue($node_moment->hard_disk_usage == $_POST['hard_disk_usage']);
         $this->assertTrue($node_moment->temperature == $_POST['temperature']);
         $this->assertTrue($node_moment->weather == $_POST['weather']);
-    }
-
-
-    /**
-     * Creates a dummy node to attach node_moments to.
-     * 
-     * @return Node A dummy node.
-     */
-    private function createDummyNode()
-    {
-        $node = new Node();
-        $node->node_hash_id = Yii::app()->random->hashID();
-        $node->system = 'system';
-        $node->cpu = 'cpu';
-        $node->hard_disk = 'hard_disk';
-        $node->created_at = str_replace("+0000", "Z", date(DATE_ISO8601, getdate()[0]));
-        $node->updated_at = str_replace("+0000", "Z", date(DATE_ISO8601, getdate()[0]));
-        $node->save();
-
-        return $node;
     }
 }

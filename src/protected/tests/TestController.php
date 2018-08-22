@@ -15,7 +15,6 @@ use Common\Reflection;
  *
  * @author Christian Micklisch <christian.micklisch@successwithsos.com>
  */
-
 class TestController extends CDbTestCase
 {
     protected $controller_name;
