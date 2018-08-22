@@ -6,8 +6,6 @@
  * @author  Christian Micklisch <christian.micklisch@successwithsos.com>
  */
 
-use Common\ApiController;
-
 /**
  * The TaskController Acts as a default controller.
  *
@@ -16,7 +14,7 @@ use Common\ApiController;
  *
  * @author Christian Micklisch <christian.micklisch@successwithsos.com>
  */
-class TaskController extends ApiController
+class TaskController extends ApiControllerExtension
 {
     const INSTALL_COMMAND_POST_KEY = 'install_command';
     const START_COMMAND_POST_KEY = 'start_command';
@@ -44,21 +42,11 @@ class TaskController extends ApiController
      */
     public function actionCreate()
     {
-        if (empty($_POST)) {
-            $this->renderJSONError("Not a proper http method type, please send a POST");
-        } else if ($this->checkPostKey(self::INSTALL_COMMAND_POST_KEY)) {
-            $this->renderJSONError(
-                $this->generatePostKeyMissingError(self::INSTALL_COMMAND_POST_KEY)
-            );
-        } else if ($this->checkPostKey(self::START_COMMAND_POST_KEY)) {
-            $this->renderJSONError(
-                $this->generatePostKeyMissingError(self::START_COMMAND_POST_KEY)
-            );
-        } else if ($this->checkPostKey(self::END_COMMAND_POST_KEY)) {
-            $this->renderJSONError(
-                $this->generatePostKeyMissingError(self::END_COMMAND_POST_KEY)
-            );
-        } else {
+        if ($this->validateRequest([
+            self::INSTALL_COMMAND_POST_KEY, 
+            self::START_COMMAND_POST_KEY, 
+            self::END_COMMAND_POST_KEY]))
+        {
             try {
                 $task = $this->createTask();
 
@@ -90,28 +78,5 @@ class TaskController extends ApiController
         $task->save();
 
         return $task;
-    }
-
-    /**
-     * Checks if the provided POST key name is missing.
-     * 
-     * @param  string $key_name The POST key name.
-     * @return boolean          If the key is missing from POST.
-     */
-    private function checkPostKey($key_name = "")
-    {
-        return !array_key_exists($key_name, $_POST) || empty($_POST[$key_name]);
-    }
-
-    /**
-     * Generates the Error message for when a POST key is missing.
-     * 
-     * @param  string $key_name The POST key name.
-     * @return string           A error message.
-     */
-    private function generatePostKeyMissingError($key_name = "")
-    {
-        return "Error cannot be created as no " . $key_name .
-                " was provided, please send a POST with '" . $key_name . "'";
     }
 }

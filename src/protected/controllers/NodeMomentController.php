@@ -6,8 +6,6 @@
  * @author  Christian Micklisch <christian.micklisch@successwithsos.com>
  */
 
-use Common\ApiController;
-
 /**
  * The NodeMomentController Acts as a default controller.
  *
@@ -16,7 +14,7 @@ use Common\ApiController;
  *
  * @author Christian Micklisch <christian.micklisch@successwithsos.com>
  */
-class NodeMomentController extends ApiController
+class NodeMomentController extends ApiControllerExtension
 {
     const NODE_HASH_ID_POST_KEY = 'node_hash_id';
     const CPU_USAGE_POST_KEY = 'cpu_usage';
@@ -32,35 +30,14 @@ class NodeMomentController extends ApiController
      */
     public function actionCreate()
     {
-        if (empty($_POST)) {
-            $this->renderJSONError("Not a proper http method type, please send a POST");
-        } else if ($this->checkPostKey(self::NODE_HASH_ID_POST_KEY)) {
-            $this->renderJSONError(
-                $this->generatePostKeyMissingError(self::NODE_HASH_ID_POST_KEY)
-            );
-        } else if ($this->checkPostKey(self::CPU_USAGE_POST_KEY)) {
-            $this->renderJSONError(
-                $this->generatePostKeyMissingError(self::CPU_USAGE_POST_KEY)
-            );
-        } else if ($this->checkPostKey(self::MEMORY_USAGE_POST_KEY)) {
-            $this->renderJSONError(
-                $this->generatePostKeyMissingError(self::MEMORY_USAGE_POST_KEY)
-            );
-        } else if ($this->checkPostKey(self::HARD_DISK_USAGE_POST_KEY)) {
-            $this->renderJSONError(
-                $this->generatePostKeyMissingError(self::HARD_DISK_USAGE_POST_KEY)
-            );
-        } else if ($this->checkPostKey(self::TEMPERATURE_POST_KEY)) {
-            $this->renderJSONError(
-                $this->generatePostKeyMissingError(self::TEMPERATURE_POST_KEY)
-            );
-        } else if ($this->checkPostKey(self::WEATHER_POST_KEY)) {
-            $this->renderJSONError(
-                $this->generatePostKeyMissingError(self::WEATHER_POST_KEY)
-            );
-        } else if (!Node::model()->nodeHashID($_POST[self::NODE_HASH_ID_POST_KEY])->exists()) {
-            $this->renderJSONError("Node does not exist, please provide a node with a node_hash_id");
-        } else {
+        if ($this->validateRequest([
+                self::NODE_HASH_ID_POST_KEY, 
+                self::CPU_USAGE_POST_KEY, 
+                self::MEMORY_USAGE_POST_KEY, 
+                self::HARD_DISK_USAGE_POST_KEY, 
+                self::TEMPERATURE_POST_KEY, 
+                self::WEATHER_POST_KEY])) 
+        {
             try {
 
                 $node_moment = $this->createNodeMoment();
@@ -95,29 +72,5 @@ class NodeMomentController extends ApiController
         $node_moment->save();
 
         return $node_moment;
-    }
-
-
-    /**
-     * Checks if the provided POST key name is missing.
-     * 
-     * @param  string $key_name The POST key name.
-     * @return boolean          If the key is missing from POST.
-     */
-    private function checkPostKey($key_name = "")
-    {
-        return !array_key_exists($key_name, $_POST) || empty($_POST[$key_name]);
-    }
-
-    /**
-     * Generates the Error message for when a POST key is missing.
-     * 
-     * @param  string $key_name The POST key name.
-     * @return string           A error message.
-     */
-    private function generatePostKeyMissingError($key_name = "")
-    {
-        return "Error cannot be created as no " . $key_name .
-                " was provided, please send a POST with '" . $key_name . "'";
     }
 }

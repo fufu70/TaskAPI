@@ -37,23 +37,23 @@ return array(
 	'defaultController' => 'default',
 	// application components
 	'components' => array(
-        'urlManager' => array(
-        	'class' => 'UrlManager',
-        	'urlFormat' => 'path',
-        	'showScriptName' => false,
-     		// 'caseSensitive' => false,
-        	'rules' => array(
+        'urlManager' => [
+            'class' => 'Common\UrlManager',
+            'urlFormat' => 'path',
+            'showScriptName' => false,
+            // 'caseSensitive' => false,
+            'rules' => [
                 // REST patterns
-                array('api/list', 'pattern' => 'api/<model:\w+>', 'verb' => 'GET'),
-                array('api/view', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'GET'),
-                array('api/update', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'PUT'),  // Update
-                array('api/delete', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'DELETE'),
-                array('api/create', 'pattern' => 'api/<model:\w+>', 'verb' => 'POST'),
+                ['api/list', 'pattern' => 'api/<model:\w+>', 'verb' => 'GET'],
+                ['api/view', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'GET'],
+                ['api/update', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'PUT'],
+                ['api/delete', 'pattern' => 'api/<model:\w+>/<id:\d+>', 'verb' => 'DELETE'],
+                ['api/create', 'pattern' => 'api/<model:\w+>', 'verb' => 'POST'],
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-        	),
-        ),
+            ],
+        ],
 		'db' => array(
 			'connectionString' => 'mysql:host=localhost;dbname=TaskAPIDB',
 			'username' => 'root',
