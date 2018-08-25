@@ -43,8 +43,8 @@ abstract class BaseNodeMoment extends GxActiveRecord {
 		return array(
 			array('node_id, node_moment_hash_id', 'required'),
 			array('node_id', 'numerical', 'integerOnly'=>true),
-			array('node_moment_hash_id, weather', 'length', 'max'=>256),
-			array('cpu_usage, memory_usage, hard_disk_usage, temperature', 'length', 'max'=>1024),
+			array('node_moment_hash_id', 'length', 'max'=>256),
+			array('cpu_usage, memory_usage, hard_disk_usage, temperature, weather', 'length', 'max'=>2048),
 			array('created_at', 'safe'),
 			array('cpu_usage, memory_usage, hard_disk_usage, temperature, weather, created_at', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('node_moment_id, node_id, node_moment_hash_id, cpu_usage, memory_usage, hard_disk_usage, temperature, weather, created_at', 'safe', 'on'=>'search'),

@@ -41,7 +41,7 @@ abstract class BaseTask extends GxActiveRecord {
 		return array(
 			array('task_hash_id', 'required'),
 			array('task_hash_id', 'length', 'max'=>256),
-			array('install_command, start_command, end_command', 'length', 'max'=>2048),
+			array('install_command, start_command, end_command', 'length', 'max'=>4096),
 			array('created_at, updated_at', 'safe'),
 			array('install_command, start_command, end_command, created_at, updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('task_id, task_hash_id, install_command, start_command, end_command, created_at, updated_at', 'safe', 'on'=>'search'),

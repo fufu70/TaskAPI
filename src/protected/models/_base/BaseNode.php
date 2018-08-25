@@ -42,7 +42,7 @@ abstract class BaseNode extends GxActiveRecord {
 		return array(
 			array('node_hash_id', 'required'),
 			array('node_hash_id', 'length', 'max'=>256),
-			array('system, cpu, hard_disk', 'length', 'max'=>1024),
+			array('system, cpu, hard_disk', 'length', 'max'=>2048),
 			array('created_at, updated_at', 'safe'),
 			array('system, cpu, hard_disk, created_at, updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('node_id, node_hash_id, system, cpu, hard_disk, created_at, updated_at', 'safe', 'on'=>'search'),
