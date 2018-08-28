@@ -154,7 +154,7 @@ class TaskController_Test extends TestController
     {
         $expectedOutput = "HTTP/1.1 200 OK\n" .
             "Content-type: application/json\n" .
-            '{"installation":"https:\/\/github.com\/fufu70\/TaskAPI\/wiki\/Installation","testing":"https:\/\/github.com\/fufu70\/TaskAPI\/wiki\/Testing"}';
+            '{"api":{"node":"https:\/\/github.com\/fufu70\/TaskAPI\/wiki\/Node-API","task":"https:\/\/github.com\/fufu70\/TaskAPI\/wiki\/Task-API"},"installation":"https:\/\/github.com\/fufu70\/TaskAPI\/wiki\/Installation","testing":"https:\/\/github.com\/fufu70\/TaskAPI\/wiki\/Testing"}';
 
         $this->assertControllerResponse('actionIndex', '/task/', $expectedOutput);
     }
@@ -217,6 +217,17 @@ class TaskController_Test extends TestController
     }
 
     /**
+     * Confirms that the task created is the same as that of the POST passed.
+     * 
+     * @param  Task  $task The task created.
+     */
+    private function assertCreationEquals(Task $task) {
+        $this->assertTrue($task->install_command == $_POST['install_command']);
+        $this->assertTrue($task->start_command == $_POST['start_command']);
+        $this->assertTrue($task->end_command == $_POST['end_command']);
+    }
+
+    /**
      * Tests the actionRequest method for failing messages.
      * 
      * @dataProvider input_actionTaskRequestFail
@@ -258,16 +269,5 @@ class TaskController_Test extends TestController
         $fail_json = $this->getFailJSON('/task/request', 'actionRequest');
 
         $this->assertTrue($fail_json->errors->general[0] == $fail_response);
-    }
-
-    /**
-     * Confirms that the task created is the same as that of the POST passed.
-     * 
-     * @param  Task  $task The task created.
-     */
-    private function assertCreationEquals(Task $task) {
-        $this->assertTrue($task->install_command == $_POST['install_command']);
-        $this->assertTrue($task->start_command == $_POST['start_command']);
-        $this->assertTrue($task->end_command == $_POST['end_command']);
     }
 }

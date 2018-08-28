@@ -31,6 +31,10 @@ class TaskController extends ApiControllerExtension
     public function actionIndex()
     {
         $this->renderJSON([
+            'api' => [
+                'node' => 'https://github.com/fufu70/TaskAPI/wiki/Node-API',
+                'task' => 'https://github.com/fufu70/TaskAPI/wiki/Task-API'
+            ],
             'installation' => 'https://github.com/fufu70/TaskAPI/wiki/Installation',
             'testing' => 'https://github.com/fufu70/TaskAPI/wiki/Testing',
         ]);
