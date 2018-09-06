@@ -147,14 +147,42 @@ class NodeController_Test extends TestController
      */
     public function test_actionNodeList()
     {
+        DummyNode::forge();
+        DummyNode::forge();
         $json = $this->getOKJSON('/node/list', 'actionList');
         $nodes = Node::model()->findAll();
 
-        $this->assertTrue(is_array($node_json));
+        $this->assertTrue(is_array($json));
         foreach ($nodes as $node) {
             $exists = false;
             foreach ($json as $json_node) {
                 if ($json_node->node_hash_id == $node->node_hash_id) {
+                    $exists = true;
+                    break;
+                }
+            }
+
+            $this->assertTrue($exists);
+        }
+    }
+
+    /**
+     * Tests that the actionMoments method returns the most recent node moments.
+     */
+    public function test_actionNodeMoment()
+    {
+        $node = DummyNode::forge();
+        DummyNodeMoment::forge($node->node_id);
+        DummyNodeMoment::forge($node->node_id);
+        DummyNodeMoment::forge($node->node_id);
+        $json = $this->getOKJSON('/node/moments/' . $node->node_hash_id, 'actionMoments');
+        
+        $node_moments = NodeMoment::model()->nodeID($node->node_id)->findAll();
+        $this->assertTrue(is_array($json));
+        foreach ($node_moments as $node_moment) {
+            $exists = false;
+            foreach ($json as $json_node) {
+                if ($json_node->node_moment_hash_id == $node_moment->node_moment_hash_id) {
                     $exists = true;
                     break;
                 }

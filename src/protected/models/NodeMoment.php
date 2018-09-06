@@ -70,4 +70,16 @@ class NodeMoment extends BaseNodeMoment
         $this->getDbCriteria()->compare('t.node_moment_hash_id', $node_moment_hash_id);
         return $this;
     }
+
+    /**
+     * Filters criteria by node_id.
+     *
+     * @param  string $node_id The node id to filter by.
+     * @return NodeMoment      A reference to this.
+     */
+    public function nodeID($node_id)
+    {
+        $this->getDbCriteria()->compare('t.node_id', $node_id);
+        return $this;
+    }
 }
