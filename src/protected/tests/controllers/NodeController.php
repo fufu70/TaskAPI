@@ -143,6 +143,28 @@ class NodeController_Test extends TestController
     }
 
     /**
+     * Tests that the actionList method returns all of the current nodes in the system.
+     */
+    public function test_actionNodeList()
+    {
+        $json = $this->getOKJSON('/node/list', 'actionList');
+        $nodes = Node::model()->findAll();
+
+        $this->assertTrue(is_array($node_json));
+        foreach ($nodes as $node) {
+            $exists = false;
+            foreach ($json as $json_node) {
+                if ($json_node->node_hash_id == $node->node_hash_id) {
+                    $exists = true;
+                    break;
+                }
+            }
+
+            $this->assertTrue($exists);
+        }
+    }
+
+    /**
      * Confirms that the node created is the same as that of the POST passed.
      * 
      * @param  Node  $node The node created.
