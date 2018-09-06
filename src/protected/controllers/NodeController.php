@@ -62,6 +62,10 @@ class NodeController extends ApiControllerExtension
 
                 $this->renderJSON($node_moment_arr);   
             }
+            else
+            {
+                $this->renderJSONError("Error moments cannot be retrieved as node does not exist. Please provide a correct 'node_hash_id'");
+            }
         } catch (Exception $e) {
             $this->renderJSONError($e->getMessage(), 500);
         }

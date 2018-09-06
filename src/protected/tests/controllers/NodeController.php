@@ -176,7 +176,7 @@ class NodeController_Test extends TestController
         DummyNodeMoment::forge($node->node_id);
         DummyNodeMoment::forge($node->node_id);
         $json = $this->getOKJSON('/node/moments/' . $node->node_hash_id, 'actionMoments');
-        
+
         $node_moments = NodeMoment::model()->nodeID($node->node_id)->findAll();
         $this->assertTrue(is_array($json));
         foreach ($node_moments as $node_moment) {
@@ -190,6 +190,17 @@ class NodeController_Test extends TestController
 
             $this->assertTrue($exists);
         }
+    }
+
+    /**
+     * Tests that the actionMoments method returns the most recent node moments.
+     */
+    public function test_actionNodeMomentFail()
+    {
+        $fail_response = "Error moments cannot be retrieved as node does not exist. Please provide a correct 'node_hash_id'";
+        $json = $this->getFailJSON('/node/moments/dummy_hash_id', 'actionMoments');
+        
+        $this->assertTrue($json->errors->general[0] == $fail_response);
     }
 
     /**
