@@ -17,15 +17,20 @@ Yii::import('application.models._base.BaseTask');
  */
 class Task extends BaseTask
 {
+    const NODE_ID = "{NODE_ID}";
+    const TASK_ID = "{TASK_ID}";
     const QUERY_UNCONNECTED_TASK = "
         SELECT DISTINCT 
-            task.task_hash_id
+            task.task_id
         FROM tbl_task AS task 
         LEFT JOIN tbl_node_has_task AS node_has_task 
             ON task.task_id = node_has_task.task_id
         WHERE
             node_has_task.node_id IS NULL
         LIMIT 1";
+    const QUERY_CONNECT_TASK = "
+        INSERT INTO tbl_node_has_task (node_id, task_id) VALUES(" . self::NODE_ID . ", " . self::TASK_ID . ");
+    ";
 
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
@@ -79,6 +84,18 @@ class Task extends BaseTask
     }
 
     /**
+     * Filters criteria by task_id.
+     *
+     * @param  string $task_id The task id to filter by.
+     * @return Task            A reference to this.
+     */
+    public function taskID($task_id)
+    {
+        $this->getDbCriteria()->compare('t.task_id', $task_id);
+        return $this;
+    }
+
+    /**
      *
      *
      * Query Methods
@@ -94,17 +111,30 @@ class Task extends BaseTask
      * 
      * @return Task An unconnected Task or simply null.
      */
-    public function getUnconnectedTask()
+    public function setUnconnectedTask($node_id)
     {
+        // $query_str = str_replace(self::NODE_ID, $node_id, self::QUERY_UNCONNECTED_TASK);
         $connection = Yii::app()->db;
-        $command = $connection->createCommand(self::QUERY_UNCONNECTED_TASK);
-        $result = $command->query();
+        $transaction = $connection->beginTransaction();
+        $task_id = 0;
 
-        
-        if (sizeof($result) > 0) {
-            foreach ($result as $task) {
-                return self::model()->taskHashID($task['task_hash_id'])->find();
+        try {
+            $result = $connection->createCommand(self::QUERY_UNCONNECTED_TASK)->query();
+
+            if (sizeof($result) > 0) {
+                foreach ($result as $task) {
+                    $task_id = $task['task_id'];
+                }
             }
+            
+            $query_str = str_replace(self::NODE_ID , $node_id, self::QUERY_CONNECT_TASK);
+            $query_str = str_replace(self::TASK_ID , $task_id, $query_str);
+            $connection->createCommand($query_str)->execute();
+            $transaction->commit();
+            
+            return Task::model()->taskID($task_id)->find();
+        } catch (Exception $e) {
+            $transaction->rollback();
         }
 
         return null;

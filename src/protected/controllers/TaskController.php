@@ -123,15 +123,9 @@ class TaskController extends ApiControllerExtension
     private function requestTask()
     {
         // find task
-        $task = Task::model()->getUnconnectedTask();
+        $node_id = Node::model()->nodeHashId($_POST[self::NODE_HASH_ID_COMMAND_POST_KEY])->find()->node_id;
+        $task = Task::model()->setUnconnectedTask($node_id);
 
-        if (!is_null($task))
-        {
-            $node_has_task = new NodeHasTask();
-            $node_has_task->task_id = $task->task_id;
-            $node_has_task->node_id = Node::model()->nodeHashId($_POST[self::NODE_HASH_ID_COMMAND_POST_KEY])->find()->node_id;
-            $node_has_task->save();
-        }
 
         return $task;
     }
